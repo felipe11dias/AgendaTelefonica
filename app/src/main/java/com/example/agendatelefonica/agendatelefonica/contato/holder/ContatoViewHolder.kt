@@ -12,8 +12,8 @@ class ContatoViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         with(view) {
             contato.name = edit_nome_contato.text.toString()
             contato.email = edit_email_contato.text.toString()
-            contato.telefone = edit_telefone_contato.text.toString()
-            contato.avatarUrl = edit_url_imagem_contato.text.toString()
+            contato.phone = edit_telefone_contato.text.toString()
+            contato.picture = edit_url_imagem_contato.text.toString()
         }
     }
 

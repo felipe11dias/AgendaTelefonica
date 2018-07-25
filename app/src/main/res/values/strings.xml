@@ -11,4 +11,5 @@
     <string name="botao_criar_novo_contato">Criar Contato</string>
     <string name="botao_editar_contato">Editar</string>
     <string name="botao_apagar_contato">Apagar</string>
+    <string name="datanascimento_contato">Data de nascimento:</string>
 </resources>

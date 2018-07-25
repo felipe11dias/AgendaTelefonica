@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
     private fun configBotaoCriarConta() {
         botaoCriarConta.setOnClickListener {
 
-            var usuario = Usuario()
+            val usuario = Usuario()
             usuario.email = email_EditText.text.toString()
             usuario.password = password_EditText2.text.toString()
             usuario.passwordConfirmation = password_EditText2.text.toString()
 
             AuthBusiness.criarUsuario(usuario, {
-                Snackbar.make(botaoCriarConta, "Deu tudo certo!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(botaoCriarConta, "Usuario criado com sucesso!", Snackbar.LENGTH_SHORT).show()
 
             }, { messageResource ->
                 Snackbar.make(botaoCriarConta, messageResource, Snackbar.LENGTH_SHORT).show()
@@ -44,19 +44,15 @@ class MainActivity : AppCompatActivity() {
     private fun configBotaoLogin() {
         botaoLogin.setOnClickListener {
 
-            var usuario =  Usuario()
+            val usuario =  Usuario()
             usuario.email = email_EditText.text.toString()
             usuario.password = password_EditText2.text.toString()
 
             AuthBusiness.login(usuario, {
-                Snackbar.make(botaoLogin, "Deu tudo certo!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(botaoLogin, "Login efetuado com sucesso!", Snackbar.LENGTH_SHORT).show()
 
-                val extraBundle = Bundle()
-                extraBundle.putString("Email", email_EditText.text.toString())
-                extraBundle.putString("Password", password_EditText2.text.toString())
-
-                val intentDetalhesActivity = Intent(this, ContatosActivity::class.java)
-                startActivity(intentDetalhesActivity)
+                val intentContatosActivity = Intent(this, ContatosActivity::class.java)
+                startActivity(intentContatosActivity)
 
             }, { messageResource ->
                 Snackbar.make(botaoLogin, messageResource, Snackbar.LENGTH_SHORT).show()

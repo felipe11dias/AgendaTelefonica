@@ -23,7 +23,7 @@ object ContatoNetwork {
     }
 
     fun criarContato(usuario: Usuario, contato: Contato, onSuccess:() -> Unit, onError: () -> Unit){
-        ContatoAPI.criarContato(usuario.uid!!, usuario.acessToken!!, usuario.client!!, contato)
+        ContatoAPI.criarContato(usuario.uid, usuario.accessToken, usuario.client, contato)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -37,7 +37,7 @@ object ContatoNetwork {
     }
 
     fun listarContato(usuario: Usuario, onSuccess: () -> Unit,onError: () -> Unit){
-        ContatoAPI.listarContato(usuario.uid!!, usuario.client!!, usuario.acessToken!!)
+        ContatoAPI.listarContato(usuario.uid, usuario.client, usuario.accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

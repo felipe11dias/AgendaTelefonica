@@ -20,6 +20,16 @@ object AuthDatabase {
 
     }
 
+    fun buscarUsuario(onSuccess: (usuario: Usuario) -> Unit){
+        Realm.getDefaultInstance().use {
+           val usuario = it.copyFromRealm(it.where(Usuario::class.java).findFirst())
+            usuario?.let {
+                onSuccess(usuario)
+            }
+
+        }
+    }
+
     fun salvarUsuario(usuario: Usuario,onSuccess: () -> Unit){
 
         Realm.getDefaultInstance().use { realm ->

@@ -21,10 +21,8 @@ class ContatosActivity : AppCompatActivity(){
     private fun configBotaoCriarContato() {
         botaoCriarNovoContato.setOnClickListener {
 
-            val intentDetalhesActivity = Intent(this, ContatosDados::class.java)
-            startActivity(intentDetalhesActivity)
-
-            Snackbar.make(botaoCriarConta, "Deu tudo certo!", Snackbar.LENGTH_SHORT).show()
+            val intentContatosDados = Intent(this, ContatosDados::class.java)
+            startActivity(intentContatosDados)
         }
     }
 

@@ -9,15 +9,15 @@ import retrofit2.http.POST
 
 interface ContatoAPI {
 
-    @POST("contatos")
-    fun criarContato(@Header("uid") uid: String,
-                     @Header("client") client: String,
-                     @Header("acess-token") acessToken: String,
+    @POST("contacts")
+    fun criarContato(@Header("uid") uid: String?,
+                     @Header("client") client: String?,
+                     @Header("acess-token") accessToken: String?,
                      @Body contatos: Contato): Observable<Contato>
 
-    @GET("contatos")
-    fun listarContato(@Header("uid")uid: String,
-                    @Header("client")client: String,
-                    @Header("acess-token") acessToken: String): Observable<List<Contato>>
+    @GET("contacts")
+    fun listarContato(@Header("uid")uid: String?,
+                      @Header("client")client: String?,
+                      @Header("acess-token") accessToken: String?): Observable<List<Contato>>
 
 }

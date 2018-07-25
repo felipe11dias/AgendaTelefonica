@@ -1,5 +1,6 @@
 package com.example.agendatelefonica.agendatelefonica.contato.business
 
+import com.example.agendatelefonica.agendatelefonica.auth.database.AuthDatabase
 import com.example.agendatelefonica.agendatelefonica.auth.model.Usuario
 import com.example.agendatelefonica.agendatelefonica.contato.database.ContatoDatabase
 import com.example.agendatelefonica.agendatelefonica.contato.model.Contato
@@ -16,13 +17,15 @@ object ContatoBusiness {
 
 
     fun criarContato(contato: Contato, onSuccess: () -> Unit, onError:() -> Unit){
-        ContatoNetwork.criarContato(contato, {
-            ContatoDatabase.salvarContato(contato){
-                onSuccess()
-            }
-        }, {
-            onError()
-        })
+        AuthDatabase.buscarUsuario { usuario ->
+            ContatoNetwork.criarContato(usuario, contato, {
+                ContatoDatabase.salvarContato(contato){
+                    onSuccess()
+                }
+            }, {
+                onError()
+            })
+        }
     }
 
 

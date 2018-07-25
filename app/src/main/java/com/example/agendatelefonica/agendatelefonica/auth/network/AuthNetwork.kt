@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object AuthNetwork {
 
     val AuthAPI by lazy {
-        getRetrofit().create(authAPI::class.java)
+        getRetrofit().create(AuthAPI::class.java)
     }
 
     //criando retrofit para comunicao com API
@@ -23,17 +23,23 @@ object AuthNetwork {
                 .build()
     }
 
-    fun login(usuario: Usuario, onSuccess: (usuario: AuthUsuario) -> Unit, onError:()  -> Unit) {
+    fun login(usuario: Usuario, onSuccess: (usuario: Usuario) -> Unit, onError:()  -> Unit) {
 
         AuthAPI.login(usuario)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({response->
 
-                    it?.let {
+                    val usuarioResponse = response.body()
+
+                    usuarioResponse?.let {
+
+                        it.uid = response.headers()["uid"]
+                        it.client = response.headers()["client"]
+                        it.accessToken = response.headers()["access-token"]
+
                         onSuccess(it)
                     }
-
                 },{
                     onError()
                 })

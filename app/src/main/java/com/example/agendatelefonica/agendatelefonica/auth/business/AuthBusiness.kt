@@ -11,7 +11,7 @@ object AuthBusiness {
     fun login(usuario: Usuario, onSuccess: ()-> Unit, onError:(message: Int) -> Unit){
 
         AuthNetwork.login(usuario, {
-            AuthDatabase.salvarLogin(usuario){
+            AuthDatabase.salvarLogin(it){
                 onSuccess()
             }
         }, {
