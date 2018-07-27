@@ -19,7 +19,7 @@ object ContatoBusiness {
     fun criarContato(contato: Contato, onSuccess: () -> Unit, onError:() -> Unit){
         AuthDatabase.buscarUsuario { usuario ->
             ContatoNetwork.criarContato(usuario, contato, {
-                ContatoDatabase.salvarContato(contato){
+                ContatoDatabase.salvarContato(it){
                     onSuccess()
                 }
             }, {

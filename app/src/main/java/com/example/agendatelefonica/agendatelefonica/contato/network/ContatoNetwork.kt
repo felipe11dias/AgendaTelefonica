@@ -1,5 +1,6 @@
 package com.example.agendatelefonica.agendatelefonica.contato.network
 
+import android.util.Log
 import com.example.agendatelefonica.agendatelefonica.auth.model.Usuario
 import com.example.agendatelefonica.agendatelefonica.contato.model.Contato
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ContatoNetwork {
 
-    val ContatoAPI by lazy {
+    val contatoAPI by lazy {
         getRetrofit().create(ContatoAPI::class.java)
     }
 
@@ -22,22 +23,24 @@ object ContatoNetwork {
                 .build()
     }
 
-    fun criarContato(usuario: Usuario, contato: Contato, onSuccess:() -> Unit, onError: () -> Unit){
-        ContatoAPI.criarContato(usuario.uid, usuario.accessToken, usuario.client, contato)
+    fun criarContato(usuario: Usuario, contato: Contato, onSuccess:(retornoContato: Contato) -> Unit, onError: () -> Unit){
+        contatoAPI.criarContato(usuario.uid, usuario.client, usuario.accessToken, contato)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({ contato ->
 
-                    it?.let {
-                        onSuccess()
+                    contato?.let {
+                        onSuccess(contato)
                     }
                 },{
+                    Log.d("TAG", " ERRO AQ -----> ${usuario.uid} ${usuario.client} ${usuario.accessToken}")
                     onError()
+
                 })
     }
 
     fun listarContato(usuario: Usuario, onSuccess: () -> Unit,onError: () -> Unit){
-        ContatoAPI.listarContato(usuario.uid, usuario.client, usuario.accessToken)
+        contatoAPI.listarContato(usuario.uid, usuario.client, usuario.accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

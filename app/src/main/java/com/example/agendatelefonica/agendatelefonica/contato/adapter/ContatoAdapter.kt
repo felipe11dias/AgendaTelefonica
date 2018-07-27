@@ -10,20 +10,22 @@ import com.example.agendatelefonica.agendatelefonica.contato.model.Contato
 
 class ContatoAdapter : RecyclerView.Adapter<ContatoViewHolder>() {
 
-    val contatos: List<Contato> = ContatoBusiness.listarContato()
+    val listaContatos: List<Contato> = ContatoBusiness.listarContato()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContatoViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.viewholder_contato, parent, false)
+                .inflate(R.layout.linha_recyclerview, parent, false)
+
+
 
         return ContatoViewHolder(view)
     }
 
-    override fun getItemCount(): Int = contatos.size
+    override fun getItemCount(): Int = listaContatos.size
 
     override fun onBindViewHolder(holder: ContatoViewHolder, position: Int) {
-        holder.bind(contatos[position])
+        holder.bind(listaContatos[position])
     }
 
 }

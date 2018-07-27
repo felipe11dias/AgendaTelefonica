@@ -41,15 +41,17 @@ class ContatosDados : AppCompatActivity(){
             contato.email = edit_email_contato.text.toString()
             contato.phone = edit_telefone_contato.text.toString()
             contato.picture = edit_url_imagem_contato.text.toString()
+            contato.birth = edit_datanascimento_cotato.text.toString().toLong()
+
 
 
             ContatoBusiness.criarContato(contato, {
-                Snackbar.make(botaoCriarConta, "Contato criado!", Snackbar.LENGTH_SHORT).show()
+
 
                 val intentContatosActivity = Intent(this, ContatosActivity::class.java)
                 startActivity(intentContatosActivity)
             }, {
-                Snackbar.make(botaoCriarConta, "Dados invalidos!", Snackbar.LENGTH_SHORT).show()
+
             })
 
         }
